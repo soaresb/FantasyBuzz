@@ -39,10 +39,10 @@ class WR extends Component {
           <hr color="white"/>
           <BuzzNav />
         </header>
-
+        <div></div>
         <Player player={this.state.players} />
 
-        
+
 
       </div>
     );
