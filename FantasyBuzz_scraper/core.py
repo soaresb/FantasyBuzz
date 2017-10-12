@@ -2,6 +2,7 @@ from collections import Counter
 import sys
 import pymongo
 import json
+import config
 from fantasyfootballers.get_fan_footballers import main as get_fan_footballers
 from fantasypros.get_fanpros import main as get_fanpros
 from rotoworld.get_rotoworld import main as get_rotoworld
@@ -16,7 +17,7 @@ def main():
 	with open('./get_player_ids/data.json') as json_data:
 	    d = json.load(json_data)
 	
-	uri = "mongodb://bsoares:gomanny24@ds141474.mlab.com:41474/meanappdb_soares"
+	uri = config.uri
 	client = pymongo.MongoClient(uri)
 	db = client.get_default_database()
 	players = db['players']
