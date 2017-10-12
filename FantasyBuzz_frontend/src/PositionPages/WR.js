@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import '../App.css';
 import $ from 'jquery';
 import Player from '../Components/Player';
-import { Button } from 'reactstrap';
 import BuzzNav from '../Components/BuzzNav'
 class WR extends Component {
   constructor(){
@@ -43,7 +42,7 @@ class WR extends Component {
 
         <Player player={this.state.players} />
 
-        <Button color="danger">Danger!</Button>
+        
 
       </div>
     );
