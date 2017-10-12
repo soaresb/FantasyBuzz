@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import $ from 'jquery';
 import Player from './Components/Player';
-import { Button } from 'reactstrap';
+
 import BuzzNav from './Components/BuzzNav';
 import { Jumbotron, Container } from 'reactstrap';
 var jumboStyle = {
@@ -54,7 +54,7 @@ class App extends Component {
         </div>
         <Player player={this.state.players} />
 
-        <Button color="danger">Danger!</Button>
+        
 
       </div>
     );
