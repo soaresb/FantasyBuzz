@@ -5,7 +5,7 @@ from collections import Counter
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36'
 
 def main():
-	print "Getting FFCalculator"
+	print "Getting FFCalculator_DFS"
 	headers = {'User-Agent': USER_AGENT}
 	urls={}
 	url="https://fantasyfootballcalculator.com/dfs"

@@ -19,9 +19,7 @@ def main():
 	for item in items[:25]:
 		urls["https://fantasyfootballcalculator.com"+item]=1
 	#/dfs for the dfs articles waivers for the waiver articles
-	for url in urls:
-		if 'dfs' in url:
-			print url
+	
 
 	
 	for key in urls:

@@ -22,9 +22,9 @@ def main():
 		if 'rankings' not in link:
 			urls[link]=1
 	#NO WAIVER WIRE ARTICLES FROM HERE.  THERE ARE DFS ARTICLES THOUGH
-	for i in urls:
-		if 'dfs' in i:
-			print i
+	# for i in urls:
+	# 	if 'dfs' in i:
+	# 		print i
 	 
 	for key in urls:
 		count+=1

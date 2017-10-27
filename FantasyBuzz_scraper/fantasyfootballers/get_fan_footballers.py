@@ -26,11 +26,11 @@ def main():
 			if 'articles' in i:
 				urls[i]=i
 	#NO DFS ARTICLES ONLY WAIVERS
-	for i in urls:
-		if 'waiver' in i:
-			print i
-		if 'dfs' in i:
-			print i
+	# for i in urls:
+	# 	if 'waiver' in i:
+	# 		print i
+	# 	if 'dfs' in i:
+	# 		print i
 	
 	for key in urls:
 		count+=1

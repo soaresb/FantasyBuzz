@@ -19,9 +19,9 @@ def main():
 	for item in items:
 		if item not in urls:
 			urls[item]=1
-	for i in urls:
-		if 'daily' in i or 'slate' in i:
-			print i
+	# for i in urls:
+	# 	if 'daily' in i or 'slate' in i:
+	# 		print i
 	#dfs only.  Links aren't consistant but most of the will have "slate" or daily-fantasy in it.
 	
 	for key in urls:

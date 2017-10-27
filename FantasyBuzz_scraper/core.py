@@ -25,6 +25,7 @@ def main():
 	client = pymongo.MongoClient(uri)
 	db = client.get_default_database()
 	players = db['players']
+	dfs=db['dfs']
 
 	player_dict = d
 
@@ -58,7 +59,7 @@ def main():
 	ffcalculator_dfs = get_ffcalculator_dfs()
 	dailyfantasycafe_dfs = get_dailyfantasycafe_dfs()
 
-	dict_to_insert = fantasypros+fantasyfootballers+rotoworld+ffcalculator+fantasylabs+rotoballer+athlonsports+breakingfootball+gridironexpertsdfs+rotoworld_dfs+get_ffcalculator_dfs+get_dailyfantasycafe_dfs()
+	dict_to_insert = fantasypros+fantasyfootballers+rotoworld+ffcalculator+fantasylabs+rotoballer+athlonsports+breakingfootball+gridironexpertsdfs+rotoworld_dfs+ffcalculator_dfs+dailyfantasycafe_dfs
 	arr_to_insert=[]
 	for key, value in dict_to_insert.items():
 		if key in player_dict:
@@ -69,9 +70,20 @@ def main():
 			temp['pos']=player_dict[key][1]
 			arr_to_insert.append(temp)
 
-	# players.insert(arr_to_insert,check_keys=False)
+	players.insert(arr_to_insert,check_keys=False)
 	# print ffbcount+fantasyproscount+rotoworldcount+ffcount+fantasylabscount+rotoballercount+athloncount+breakingcount
-	print gridironexpertsdfs+breakingfootballdfs+ffdfs+rotoworld_dfs+get_ffcalculator_dfs+get_dailyfantasycafe_dfs()
+	# print gridironexpertsdfs+breakingfootballdfs+ffdfs+rotoworld_dfs+ffcalculator_dfs+dailyfantasycafe_dfs
+	dfs_to_insert = gridironexpertsdfs+breakingfootballdfs+ffdfs+rotoworld_dfs+ffcalculator_dfs+dailyfantasycafe_dfs
+	dfs_arr_to_insert=[]
+	for key, value in dfs_to_insert.items():
+		if key in player_dict:
+			temp={}
+			temp['name']=key
+			temp['value']=value
+			temp['url']=player_dict[key][0]
+			temp['pos']=player_dict[key][1]
+			dfs_arr_to_insert.append(temp)
+	dfs.insert(dfs_arr_to_insert,check_keys=False)
 	# cursor=players.find({"pos":'RB'},sort=[("value",-1)]).limit(25)
 	# for player in cursor:
 	# 	print player

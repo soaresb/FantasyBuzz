@@ -8,6 +8,7 @@ def main():
 
 	headers = {'User-Agent': USER_AGENT}
 	urls={}
+	print "Getting Gridiorn Experts"
 	#fantasy pros already lists all of the articles nicely on thier website so I can gather the links from there
 	url="https://www.fantasypros.com/nfl/advice/gridiron-experts.php"
 	page = requests.get(url,headers=headers)
@@ -20,11 +21,7 @@ def main():
 	links = items.xpath(".//strong/a/@href")
 	for link in links:
 		urls[link]=1
-	for url in urls:
-		if 'draftkings' in url:
-			print url
-		if 'fanduel' in url:
-			print url
+	
 	for key in urls:
 		currurl=key
 		npage = requests.get(currurl,headers=headers)
