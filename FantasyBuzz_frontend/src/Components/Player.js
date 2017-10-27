@@ -11,11 +11,14 @@ class Player extends Component {
 
   render() {
     let players;
+    let count=0
     if(this.props.player){
       players = this.props.player.map(player => {
+        count = count + 1;
         return(
-            <PlayerItem key={player._id.$oid} player={player} />
+          <PlayerItem key={player._id.$oid} player={player} num={count}/>
         );
+
       })
     }
       return(

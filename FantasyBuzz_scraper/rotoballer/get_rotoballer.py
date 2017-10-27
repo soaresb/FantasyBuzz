@@ -11,7 +11,7 @@ def main():
 	#fantasy pros already lists all of the articles nicely on thier website so I can gather the links from there
 	url="https://www.fantasypros.com/nfl/advice/rotoballer.php"
 	page = requests.get(url,headers=headers)
-
+	count=0
 	players=Counter()
 
 
@@ -20,8 +20,9 @@ def main():
 	links = items.xpath(".//strong/a/@href")
 	for link in links:
 		urls[link]=1
-
+	#waiver wire stuff here
 	for key in urls:
+		count+=1
 		currurl=key
 		if 'podcast' not in currurl:
 			npage = requests.get(currurl,headers=headers)
@@ -33,7 +34,7 @@ def main():
 				else:
 					players[i.encode('ascii', 'ignore').decode('ascii')]=1
 
-	return players
+	return players, count
 			
 
 if __name__ == '__main__':

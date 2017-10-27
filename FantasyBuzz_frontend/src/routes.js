@@ -6,6 +6,7 @@ import RB from './PositionPages/RB';
 import QB from './PositionPages/QB';
 import WR from './PositionPages/WR';
 import TE from './PositionPages/TE';
+import TeamForm from './PositionPages/TeamForm'
 // import NotFound from './components/NotFound';
 
 const Routes = (props) => (
@@ -15,6 +16,7 @@ const Routes = (props) => (
     <Route path="/QB" component={QB} />
     <Route path="/WR" component={WR} />
     <Route path="/TE" component={TE} />
+    <Route path="/Team" component={TeamForm} />
   </Router>
 );
 

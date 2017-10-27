@@ -5,28 +5,23 @@ from collections import Counter
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36'
 
 def main():
-	print "Getting RotoWorld"
+	print "Getting RotoWorld_DFS"
 	headers = {'User-Agent': USER_AGENT}
 	urls={}
-	url="http://www.rotoworld.com/features/nfl"
+	url="http://www.rotoworld.com/dailyList?sport=nfl"
 	page = requests.get(url,headers=headers)
 	count=0
 	players=Counter()
 
 
 	tree = html.fromstring(page.content)
-	items = tree.xpath("//h1/a/@href")
-	for item in items[:30]:
-		if 'podcast' not in item:
-			try:
-				urls["http://www.rotoworld.com"+str(item)]=1
-			except Exception as e:
-				print e
-			
-	
-
-	#waiver
-	
+	items = tree.xpath("//h3/a/@href")
+	for i in items[:15]:
+		if '#panel-title' not in i:
+			if 'https' in i:
+				urls[i]=1
+			else:
+				urls["http://www.rotoworld.com"+str(i)]=1
 
 	for key in urls:
 		count+=1
@@ -41,8 +36,6 @@ def main():
 						players[player.encode('ascii', 'ignore').decode('ascii')]+=1
 				else:
 						players[player.encode('ascii', 'ignore').decode('ascii')]=1
-	
-	return players, count
-
+	return players
 if __name__ == '__main__':
 	main()

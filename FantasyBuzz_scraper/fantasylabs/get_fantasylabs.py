@@ -10,7 +10,7 @@ def main():
 	urls={}
 	url="http://www.fantasylabs.com/articles/category/nfl/"
 	page = requests.get(url,headers=headers)
-
+	count=0
 	players=Counter()
 
 
@@ -19,8 +19,13 @@ def main():
 	for item in items:
 		if item not in urls:
 			urls[item]=1
-
+	for i in urls:
+		if 'daily' in i or 'slate' in i:
+			print i
+	#dfs only.  Links aren't consistant but most of the will have "slate" or daily-fantasy in it.
+	
 	for key in urls:
+		count+=1
 		currurl=key
 		npage = requests.get(currurl,headers=headers)
 		ntree = html.fromstring(npage.content)
@@ -32,7 +37,7 @@ def main():
 			else:
 				players[player]=1
 	
-	return players
+	return players, count
 
 if __name__ == '__main__':
 	main()

@@ -19,7 +19,7 @@ def main():
 				tree = html.fromstring(page.content)
 				pic_url = tree.xpath("//div[@class='player-photo']/img/@src")[0]
 				
-				new_player_dict[i[1].full_name] = [pic_url,i[1].position]
+				new_player_dict[i[1].full_name] = [pic_url,i[1].position,i[1].team]
 				print i[1].full_name, i[1].status, i[1].position
 			elif i[1].position == 'RB':
 				headers = {'User-Agent': USER_AGENT}
@@ -27,7 +27,7 @@ def main():
 				page = requests.get(url,headers=headers)
 				tree = html.fromstring(page.content)
 				pic_url = tree.xpath("//div[@class='player-photo']/img/@src")[0]
-				new_player_dict[i[1].full_name] = [pic_url, i[1].position]
+				new_player_dict[i[1].full_name] = [pic_url, i[1].position,i[1].team]
 
 			elif i[1].position == 'WR':
 				headers = {'User-Agent': USER_AGENT}
@@ -35,18 +35,21 @@ def main():
 				page = requests.get(url,headers=headers)
 				tree = html.fromstring(page.content)
 				pic_url = tree.xpath("//div[@class='player-photo']/img/@src")[0]
-				new_player_dict[i[1].full_name] = [pic_url,i[1].position]
+				new_player_dict[i[1].full_name] = [pic_url,i[1].position,i[1].team]
 
 			elif i[1].position == 'TE':
 				headers = {'User-Agent': USER_AGENT}
 				url=i[1].profile_url
 				page = requests.get(url,headers=headers)
 				tree = html.fromstring(page.content)
-				pic_url = tree.xpath("//div[@class='player-photo']/img/@src")[0]
-				new_player_dict[i[1].full_name] = [pic_url,i[1].position]
+				try:
+					pic_url = tree.xpath("//div[@class='player-photo']/img/@src")[0]
+				except:
+					pass
+				new_player_dict[i[1].full_name] = [pic_url,i[1].position,i[1].team]
 		
 	
-	with open('data.json', 'w') as fp:
+	with open('datateams.json', 'w') as fp:
 		json.dump(new_player_dict, fp) 
 
 	return new_player_dict

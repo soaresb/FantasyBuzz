@@ -13,7 +13,7 @@ def main():
 
 	players=Counter()
 
-
+	count=0
 	tree = html.fromstring(page.content)
 	items = tree.xpath("//ul[@class='newscodes-wrap']")
 
@@ -25,8 +25,15 @@ def main():
 				pass
 			if 'articles' in i:
 				urls[i]=i
-
+	#NO DFS ARTICLES ONLY WAIVERS
+	for i in urls:
+		if 'waiver' in i:
+			print i
+		if 'dfs' in i:
+			print i
+	
 	for key in urls:
+		count+=1
 		currurl=key
 		npage = requests.get(currurl)
 		ntree = html.fromstring(npage.content)
@@ -40,7 +47,7 @@ def main():
 				else:
 						players[player.encode('ascii', 'ignore').decode('ascii')]=1
 	
-	return players
+	return players, count
 
 
 if __name__ == '__main__':

@@ -17,7 +17,10 @@ class PlayerItem extends Component {
         </Media>
         <Media body>
           <Media heading style={divStyle}>
+            {this.props.num}.
+            &nbsp;
             {this.props.player.name}
+
           </Media>
           {this.props.player.value}
         </Media>

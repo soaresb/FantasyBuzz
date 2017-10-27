@@ -13,21 +13,63 @@ def main():
 	page = requests.get(url,headers=headers)
 
 	players=Counter()
-
+	dfs=Counter()
 
 	tree = html.fromstring(page.content)
 	items = tree.xpath("//div[@class='pull-left nine columns']")[0]
 	links = items.xpath(".//strong/a/@href")
 	for link in links:
 		urls[link]=1
-
+	for url in urls:
+		if 'draftkings' in url:
+			print url
+		if 'fanduel' in url:
+			print url
 	for key in urls:
 		currurl=key
 		npage = requests.get(currurl,headers=headers)
 		ntree = html.fromstring(npage.content)
 		nitems = ntree.xpath("//div[@class='entry-content herald-entry-content']")
 		for i in nitems:
-			if 'podcast' not in currurl:
+			if 'fanduel' in currurl:
+				playerLst = i.xpath("//h3/text()")
+				for player in playerLst:
+					vs = player.find('vs')
+					if vs != -1:
+						if player in players:
+							players[player[1:vs-1]]+=1
+						else:
+							players[player[1:vs-1]]=1
+						if player in dfs:
+							dfs[player[1:vs-1]]+=1
+						else:
+							dfs[player[1:vs-1]]=1
+					at = player.find('@')
+					if at != -1:
+						if player in players:
+							players[player[1:at-1]]+=1
+						else:
+							players[player[1:at-1]]=1
+						if player in dfs:
+							dfs[player[1:at-1]]+=1
+						else:
+							dfs[player[1:at-1]]=1
+			elif 'draftkings' in currurl:
+				playerLst = i.xpath("//strong/text()")
+				for player in playerLst:
+					seperate=player.find('(')
+					if seperate != -1:
+						name=player[:seperate-1]
+						if name in players:
+							players[name.encode('ascii', 'ignore').decode('ascii')]+=1
+						else:
+							players[name.encode('ascii', 'ignore').decode('ascii')]=1
+						if name in dfs:
+							dfs[name.encode('ascii', 'ignore').decode('ascii')]+=1
+						else:
+							dfs[name.encode('ascii', 'ignore').decode('ascii')]=1
+
+			elif 'podcast' not in currurl:
 				playerLst =  i.xpath("//strong/text()")
 				for player in playerLst:
 					if 'Power Ranking' not in player and 'ESPN' not in player and 'Yahoo' not in player:
@@ -40,8 +82,9 @@ def main():
 								players[player[:isThere].encode('ascii', 'ignore').decode('ascii')]=1
 							else:
 								players[player.encode('ascii', 'ignore').decode('ascii')]=1
-	print players
-	return players
+
+	
+	return dfs
 
 		
 

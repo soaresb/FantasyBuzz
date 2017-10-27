@@ -10,7 +10,7 @@ def main():
 	urls={}
 	url="https://www.fantasypros.com/nfl/articles/"
 	page = requests.get(url,headers=headers)
-
+	count=0
 	players=Counter()
 
 
@@ -22,7 +22,9 @@ def main():
 		for i in url:
 			if i:
 				urls[i]=1
+	#Waiver articles exost.  No dfs at the moment.  Streams also exist (can put into waivers)
 	for key in urls:
+		count+=1
 		headers = {'User-Agent': USER_AGENT}
 		url=key
 		page = requests.get(url,headers=headers)
@@ -40,7 +42,7 @@ def main():
 					else:
 						players[player.encode('ascii', 'ignore').decode('ascii')]=1
 	
-	return players
+	return players, count
 
 
 if __name__ == '__main__':

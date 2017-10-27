@@ -10,17 +10,22 @@ def main():
 	urls={}
 	url="https://fantasyfootballcalculator.com/articles"
 	page = requests.get(url,headers=headers)
-
+	count=0
 	players=Counter()
-
+	dfs=Counter()
 
 	tree = html.fromstring(page.content)
 	items = tree.xpath("//div[@class='col-md-9']/a/@href")
 	for item in items[:25]:
 		urls["https://fantasyfootballcalculator.com"+item]=1
-			
+	#/dfs for the dfs articles waivers for the waiver articles
+	for url in urls:
+		if 'dfs' in url:
+			print url
 
+	
 	for key in urls:
+		count+=1
 		currurl=key
 		npage = requests.get(currurl,headers=headers)
 		ntree = html.fromstring(npage.content)
@@ -32,8 +37,14 @@ def main():
 					players[name.encode('ascii', 'ignore').decode('ascii')]+=1
 				else:
 					players[name.encode('ascii', 'ignore').decode('ascii')]=1
-					
-	return players
+				if 'dfs' in currurl:
+					if '(DFS)' not in name:
+						if name in dfs:
+							dfs[name.encode('ascii', 'ignore').decode('ascii')]+=1
+						else:
+							dfs[name.encode('ascii', 'ignore').decode('ascii')]=1
+	
+	return players, count, dfs
 
 
 
