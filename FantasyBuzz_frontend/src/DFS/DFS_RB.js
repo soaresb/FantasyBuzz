@@ -5,43 +5,19 @@ import Player from '../Components/Player';
 import { FormGroup, Label, Input } from 'reactstrap';
 import BuzzNav from '../Components/BuzzNav';
 import { browserHistory } from 'react-router';
-class DFS_home extends Component {
+class DFS_RB extends Component {
   constructor(){
     super();
     this.state = {
       players:[],
-      value:"ALL",
-      url:'https://lolstats-backend.herokuapp.com/ffb/dfs/all'
+      value:"RB",
+
     }
   }
   change = (event) =>{
     this.setState({value: event.target.value}, () => {
       console.log(this.state.value);
-      if (this.state.value==="QB"){
-        this.setState({url:'https://lolstats-backend.herokuapp.com/ffb/dfs/QBs'},() => {
-          this.getStats();
-        })
-      }
-      if (this.state.value==="RB"){
-        this.setState({url:'https://lolstats-backend.herokuapp.com/ffb/dfs/RBs'},() => {
-          this.getStats();
-        })
-      }
-      if (this.state.value==="WR"){
-        this.setState({url:'https://lolstats-backend.herokuapp.com/ffb/dfs/WRs'},() => {
-          this.getStats();
-        })
-      }
-      if (this.state.value==="TE"){
-        this.setState({url:'https://lolstats-backend.herokuapp.com/ffb/dfs/TEs'},() => {
-          this.getStats();
-        })
-      }
-      if (this.state.value==="ALL"){
-        this.setState({url:'https://lolstats-backend.herokuapp.com/ffb/dfs/all'},() => {
-          this.getStats();
-        })
-      }
+      browserHistory.push(this.state.value);
     });
 
   }
@@ -49,7 +25,7 @@ class DFS_home extends Component {
 
   getStats(){
     $.ajax({
-      url: this.state.url,
+      url: 'https://lolstats-backend.herokuapp.com/ffb/dfs/RBs',
       dataType:'json',
       cache:false,
       success: function(data){
@@ -71,7 +47,11 @@ class DFS_home extends Component {
   render() {
     return (
       <div className="App">
-        <BuzzNav />
+        <header className="App-header">
+          <h1 className="App-title">FantasyBuzz</h1>
+          <hr color="white"/>
+          <BuzzNav />
+        </header>
         <FormGroup>
           <Label for="exampleSelect">Select</Label>
           <Input type="select" name="select" id="exampleSelect" onChange={this.change} value={this.state.value}>
@@ -92,4 +72,4 @@ class DFS_home extends Component {
   }
 }
 
-export default DFS_home;
+export default DFS_RB;

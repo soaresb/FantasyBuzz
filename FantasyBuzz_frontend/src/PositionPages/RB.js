@@ -35,15 +35,13 @@ class RB extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">FantasyBuzz</h1>
-          <hr color="white"/>
-          <BuzzNav />
-        </header>
+
+        <BuzzNav />
+        
 
         <Player player={this.state.players} />
 
-        
+
 
       </div>
     );
