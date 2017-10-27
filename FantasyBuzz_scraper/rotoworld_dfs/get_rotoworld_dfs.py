@@ -36,6 +36,7 @@ def main():
 						players[player.encode('ascii', 'ignore').decode('ascii')]+=1
 				else:
 						players[player.encode('ascii', 'ignore').decode('ascii')]=1
+	print players 
 	return players
 if __name__ == '__main__':
 	main()
