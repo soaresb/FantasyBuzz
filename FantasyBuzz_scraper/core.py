@@ -84,10 +84,10 @@ def main():
 			temp['pos']=player_dict[key][1]
 			dfs_arr_to_insert.append(temp)
 	dfs.insert(dfs_arr_to_insert,check_keys=False)
-	cursor=players.find({"pos":'RB'},sort=[("value",-1)]).limit(25)
-	for player in cursor:
-		print player
-	players.update_many({},{'$set': {'value':1}})
+	# cursor=players.find({"pos":'RB'},sort=[("value",-1)]).limit(25)
+	# for player in cursor:
+	# 	print player
+	# players.update_many({},{'$set': {'value':1}})
 
 
 if __name__ == '__main__':
