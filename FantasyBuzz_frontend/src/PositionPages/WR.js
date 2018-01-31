@@ -17,7 +17,6 @@ class WR extends Component {
       cache:false,
       success: function(data){
         this.setState({players: data.cursor});
-        console.log(data.cursor);
 
       }.bind(this),
       error: function(xhr, status, err){
@@ -37,7 +36,7 @@ class WR extends Component {
       <div className="App">
 
         <BuzzNav />
-
+        
         <div></div>
         <Player player={this.state.players} />
 
